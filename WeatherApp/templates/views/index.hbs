@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{title}}</title>
+    <!-- static path for public folder is already set in app.js -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <div class="main-content">
+        {{>header}}
+        <article class="widget">
+            <form class="weatherLocation"><input placeholder="location..." type="text" /><button>Seach</button>
+            </form>
+            <div class="weatherIcon"><i class="wi wi-day-cloudy"></i></div>
+            <div class="weatherInfo">
+                <div class="temperature"><span></span></div>
+                <div class="description">
+                    <div class="weatherCondition"></div>
+                    <div class="place"></div>
+                </div>
+            </div>
+            <div class="date"></div>
+        </article>
+    </div>
+    <!-- absolute path -->
+    <script src="js/weatherPanel.js"></script>
+</body>
+
+</html>
