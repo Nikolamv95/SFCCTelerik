@@ -2,11 +2,13 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addJs('/js/productTile.js');
-        assets.addCss('/css/homePage.css');
+        assets.addCss('/css/helloWorld2.css');
     </isscript>
 
     <!-- +1.888.555.0199 --><!--This phone is a requirement to support existing Gomez monitor of SiteGenesis. Demadware customers can remove this.-->
     <div class="home-main homepage">
+        <h3>This is how we access the data from the view data: ${pdict.customReviews[0].text}, ${pdict.customReviews[0].rating}</h3>
+        <h3>This is how we access the data from the view data: ${pdict.customHooks[0].text}, ${pdict.customHooks[0].rating}</h3>
         <isslot id="home-main-m" description="Main home page slot." context="global" />
     </div>
 
