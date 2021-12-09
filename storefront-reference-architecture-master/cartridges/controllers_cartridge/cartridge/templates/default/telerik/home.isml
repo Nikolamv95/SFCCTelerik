@@ -1,0 +1,42 @@
+<isdecorate template="common/layout/page">
+    <h1>This is <isprint value="${pdict.welcomeMsg}" /> or ${pdict.welcomeMsg}</h1>
+    <isscript>
+        var numbers = ['one', 'two', 'three'];
+    </isscript>
+
+    <h1 style="color: brown; margin: 10px">Loop isml tags</h1>
+    <isloop items="${numbers}" var="subItem" status="index">
+     <isif condition="${index.index == 1}">
+         <h3 style="color: red">${subItem}</h3>
+     <iselse/>
+        <h3 style="color: blue">${subItem}</h3>
+     </isif>
+    </isloop>
+    <hr>
+
+    <h1 style="color: brown; margin: 10px">Variables isml tags</h1>
+    <isset name="customNumber" value="One" scope="pdict" />
+    <h3>${pdict.customNumber}</h3>
+    <hr>
+
+    <h1 style="color: brown; margin: 10px">Isprint</h1>
+    <h3>Today is: <isprint value="${new Date().toLocaleString()}" /></h3> 
+    <p>check console</p>
+    <script>
+        console.log(new Date().toLocaleString());
+    </script>
+    <hr>
+
+    <h1 style="color: brown; margin: 10px">Pass url parameter</h1>
+    <a href="${URLUtils.url('Home-Show')}" class="btn btn-primary btn-block continue-shopping" role="button" aria-pressed="true">
+        Home-Show
+    </a>
+    <hr>
+
+    <h1 style="color: brown; margin: 10px">Render outside template isinclude</h1>
+    <isinclude template="telerik/include" />
+    <isinclude url="${URLUtils.url('Telerik-Include')}" />
+    <hr>
+  
+</isdecorate>
+

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable valid-jsdoc */
 /* eslint-disable no-param-reassign */
 

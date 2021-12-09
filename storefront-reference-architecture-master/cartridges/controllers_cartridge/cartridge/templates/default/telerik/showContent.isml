@@ -1,0 +1,18 @@
+<isset name="content" value="${pdict.content}" scope="page" />
+<isset name="stringUtils" value="${dw.util.StringUtils}" scope="page" />
+
+<isdecorate template="common/layout/page">
+    <isif condition="${content != '' && content.online}">
+        <isprint value="${stringUtils.format(content.custom.body.markup, 'Vasko')}" encoding="off" />        
+    </isif>
+
+    <h3>Read from properties static</h3>
+   <fieldset>
+        ${Resource.msg('label.welcome', 'account', null)};
+    </fieldset>
+
+        <h3>Read from properties dynamic</h3>
+   <fieldset>
+        ${Resource.msgf('label.welcome', 'account', null, 'Pesho', 'Vasilev')};
+    </fieldset>
+</isdecorate>

@@ -1,0 +1,79 @@
+<style>
+    .wrapper{
+        display: grid;
+        grid-template-columns: [first] auto [line2] auto [line3] auto;
+        grid-template-rows: [row1-start] auto [row1-end] auto [third-line] auto [last-line];
+    }
+
+    .productWrapper {
+       margin: 10px;
+    }
+</style>
+
+<iscomment>
+    Set variables
+</iscomment>
+    <isset name="resultsCount" value="${pdict.searchResult.count}" scope="page" />
+    <isset name="query" value="${pdict.query}" scope="page" />
+<iscomment>
+    Set condition for page template
+</iscomment>
+    <isif condition="${pdict.format == "ajax"}">
+        <isset name="decorate" value="common/layout/page" scope="page" />
+    <iselse/>
+        <isset name="decorate" value="common/layout/blank" scope="page" />
+    </isif> 
+
+
+<iscomment>
+    Pass the variable from the condition above decorate
+</iscomment>
+<isdecorate template="${decorate}">
+<iscomment>
+    Print the query on the page if its not blank
+</iscomment>
+    <isif condition="${pdict.query != ''}">
+    <h3>You searched for ${pdict.query}</h3>
+    </isif>
+
+<iscomment>
+    Loop over the search result if variable resultsCount is more than 0
+</iscomment>
+    <isif condition="${resultsCount > 0}">
+
+ <iscomment>
+   Print and fromat resultsCount
+</iscomment>   
+        <h3>Product types found <isprint value="${resultsCount}" style="INTEGER" /> </h3>
+
+        <div class="wrapper">
+<iscomment>
+   Loop over productSearchHits
+</iscomment>    
+            <isloop items="${pdict.searchResult.productSearchHits}" var="productHit" status="counter">
+
+<iscomment>
+   Save current productHit in variable Product
+</iscomment>             
+            <isset name="product" value="${productHit.getProduct()}" scope="page" />
+
+<iscomment>
+   Print and redirect to Product-Show
+</iscomment>  
+            <a href="${URLUtils.url("Product-Show", "pid", product.ID)}" class="productWrapper">
+                <h4>${product.name}d</h4>
+                <img src="${product.getImage('small').httpURL}" alt="image">
+            </a>
+
+            <isif condition="${counter.count % 3 == 0}">
+            </isif>
+        </isloop>
+        </div>
+
+    <iselse/>
+<iscomment>
+   No products in the query
+</iscomment>    
+        <h3>No products found with ${query}</h3>
+    </isif>
+</isdecorate>
