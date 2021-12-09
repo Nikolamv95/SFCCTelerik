@@ -1,0 +1,8 @@
+{
+    "hooks": [
+        {
+            "name": "addJSONToViewData",
+            "script": "./cartridge/scripts/hooks/addJSON.js"
+        }
+    ]
+}
