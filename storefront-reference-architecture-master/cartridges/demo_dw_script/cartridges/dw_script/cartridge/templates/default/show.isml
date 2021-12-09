@@ -1,0 +1,11 @@
+<isscript>
+    // executes on the server
+    let customerFirstName = customer.profile.firstName;
+    let custId = customer.getID();
+    let test = "test";
+</isscript>
+<script>
+    console.log("Executes on browser")
+</script>
+<h3>SFRA -> Variables from issscript: ${customerFirstName} ${test} ${custId}</h3>
+<h3>SFRA -> Variables from pdict: ${pdict.ID} ${pdict.FirstName}</h3>

@@ -1,0 +1,2 @@
+<h3>SiteGen -> Customer ID eval node: ${pdict.custID}</h3>
+<h3>SiteGen -> Customer ID script node: ${pdict.custID}</h3>
