@@ -1,0 +1,65 @@
+<isdecorate template="common/layout/page">
+    <div class="hero slant-down account-image">
+        <h1 class="page-title">${Resource.msg('label.newsletter', 'forms', null)}</h1>
+    </div>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="${URLUtils.url('Newsletter-Save')}" class="edit-profile-form" method="POST"
+                            <isprint value="${pdict.newsletterForm.attributes}" encoding="off" />>
+                            <iscomment>
+                                Email input
+                            </iscomment>
+                            <div class="form-group
+                                    <isif condition=" ${pdict.newsletterForm.email.mandatory === true}">required</isif>">
+                                <label class="form-control-label" for="email">
+                                    <isprint value="${pdict.newsletterForm.email.label}" encoding="htmlcontent" />
+                                </label>
+                                <input type="email" class="form-control" id="email" <isprint
+                                    value="${pdict.newsletterForm.email.attributes}" encoding="off" />>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <iscomment>
+                                Full name input
+                            </iscomment>
+                            <div class="form-group
+                                    <isif condition=" ${pdict.newsletterForm.fullName.mandatory === true}">required</isif>">
+                                <label class="form-control-label" for="fullName">
+                                    <isprint value="${pdict.newsletterForm.fullName.label}" encoding="htmlcontent" />
+                                </label>
+                                <input type="fullName" class="form-control" id="fullName" <isprint
+                                    value="${pdict.newsletterForm.fullName.attributes}" encoding="off" />>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <iscomment>
+                                Skin Type input
+                            </iscomment>
+                            <div class="form-group
+                                    <isif condition=" ${pdict.newsletterForm.skinType.mandatory === true}">required</isif>">
+                                <label class="form-control-label" for="skinType">
+                                    <isprint value="${pdict.newsletterForm.skinType.label}" encoding="htmlcontent" />
+                                </label>
+                                <input type="skinType" class="form-control" id="skinType" <isprint
+                                    value="${pdict.newsletterForm.skinType.attributes}" encoding="off" />>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" name="save"
+                                        class="btn btn-save btn-block btn-primary">${Resource.msg('button.save', 'account', null)}</button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</isdecorate>
