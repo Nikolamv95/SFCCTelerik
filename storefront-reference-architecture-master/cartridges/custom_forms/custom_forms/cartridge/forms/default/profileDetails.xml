@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+	<field 
+			formid="interest" 
+			label="label.input.interest.profile" 
+			mandatory="true" 
+			max-length="100" 
+			missing-error="error.message.required"
+			range-error="error.message.100orless" 
+			type="string" />	
+
+		<field 
+			formid="countryOfResidence"
+			label="label.input.countryOfResidence.profile" 
+			type="string" 
+			mandatory="false" 
+			missing-error="address.state.missing" 
+			value-error="address.field.invalid" 
+			parse-error="error.message.required">
+
+			<options>
+				<option optionid="US" label="country.unitedStates" value="US"/>
+				<option optionid="CA" label="country.canada" value="CA"/>
+				<option optionid="UK" label="country.unitedKingdom" value="UK"/>
+				<option optionid="BG" label="country.bulgaria" value="BG"/>
+				<option optionid="DE" label="country.germany" value="DE"/>
+			</options>
+		</field>
+</form>

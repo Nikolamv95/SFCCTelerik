@@ -1,0 +1,29 @@
+<div class="form-group
+        <isif condition=" ${pdict.profileForm.customer.profileDetails.interest.mandatory === true}">required</isif>">
+    <label class="form-control-label" for="interest">
+        <isprint value="${pdict.profileForm.customer.profileDetails.interest.label}" encoding="htmlcontent" />
+    </label>
+    <input type="text" class="form-control" id="interest" <isprint
+        value="${pdict.profileForm.customer.profileDetails.interest.attributes}" encoding="off" />>
+    <div class="invalid-feedback"></div>
+</div>
+
+<isset name="currentCountryOfResidence" value="${pdict.profileForm.customer.profileDetails.countryOfResidence.value}" scope="page" />
+
+<div class="form-group
+        <isif condition=" ${pdict.profileForm.customer.profileDetails.countryOfResidence.mandatory === true}">required</isif>">
+    <label class="form-control-label" for="countryOfResidence">
+        <isprint value="${pdict.profileForm.customer.profileDetails.countryOfResidence.label}" encoding="htmlcontent" />
+    </label>
+    <select type="text" class="form-control" id="countryOfResidence" <isprint
+        value="${pdict.profileForm.customer.profileDetails.countryOfResidence.attributes}" encoding="off" />>
+        <isloop items="${pdict.profileForm.customer.profileDetails.countryOfResidence.options}" var="country" status="loopstatus">
+            <isif condition="${currentCountryOfResidence != country.value}">
+                <option id="${country.id}" value="${country.value}">${country.label}</option>
+            <iselse/>
+                <option id="${country.id}" value="${country.value}" selected>${country.label}</option>
+            </isif>
+        </isloop>
+    </select>
+    <div class="invalid-feedback"></div>
+</div>
