@@ -1,0 +1,29 @@
+.notificationWrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin: 20px 0px;
+}
+
+.hideNotification{
+    display: none;
+}
+
+.notificationHeadline {
+    margin: 20px 10px;
+}
+
+.notificationButton {
+    height: 40%;
+    align-self: center;
+}
+
+
+@media (min-width: 320px) and (max-width: 992px) {
+    .notificationButton {
+        margin-bottom: 20px;
+        margin-left: 20%;
+    }
+}

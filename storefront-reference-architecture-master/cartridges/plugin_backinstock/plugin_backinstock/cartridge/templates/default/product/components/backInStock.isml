@@ -1,0 +1,17 @@
+<div class="notificationWrapper ${product.readyToOrder ? " hideNotification" : ""}">
+    <h2 class="notificationHeadline">${Resource.msg('text.notify', 'common', null)}</h2>
+    <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+    <button class="btn btn-danger notificationButton" data-toggle="modal" data-target="#chooseBonusProductModal"
+        data-pid="${product.id}" id="notificationButton">
+        <i class="fa fa-bell"></i>
+        ${Resource.msg('button.notify', 'common', null)}
+    </button>
+    <i class="fas fa-sms"></i>
+</div>
+
+<script>
+    var notificationButton = document.getElementById("notificationButton");
+    notificationButton.onclick = function() {
+        document.dispatchEvent(new CustomEvent("notificationClicked", { bubbles: true, composed: true, detail: { file: 'backInStok' } }));
+    }
+</script>
