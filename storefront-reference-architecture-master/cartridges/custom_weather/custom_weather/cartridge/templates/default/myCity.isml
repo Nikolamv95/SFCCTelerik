@@ -1,0 +1,5 @@
+<div style="margin: 10px;">
+    <h1>The weather in <strong>${pdict.weatherBerlin.name}</strong> is:</h1>
+    <h1>There are a lot of: <strong>${pdict.weatherBerlin.weather[0].main}</strong></h1>
+    <h1>Weather description: <strong>${pdict.weatherBerlin.weather[0].description}</strong></h1>
+</div>
