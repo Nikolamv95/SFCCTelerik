@@ -1,0 +1,23 @@
+@import "variables";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+@import "components/formFields";
+@import "components/toastMessage";
+
+.backInStock-signup-message {
+    @include toast-message();
+}
+
+.backInStock-signup-alert {
+    @include toast-alert();
+}
+
+@media (min-width: 320px) and (max-width: 992px) {
+    .backInStock-signup-message{
+      top: 10%;
+    }
+
+    .backInStock-signup-alert{
+        top: 10%;
+    }
+}

@@ -1,0 +1,39 @@
+.form-group.required .form-control-label::before {
+  content: "*";
+  color: #c00; }
+
+.backInStock-signup-message {
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 20%;
+  left: 50%; 
+  z-index: 100;
+}
+
+@media (min-width: 320px) and (max-width: 992px) {
+  .backInStock-signup-message{
+    top: 10%;
+  }
+
+  .backInStock-signup-alert{
+      top: 10%;
+  }
+}
+
+.backInStock-signup-alert {
+  animation: fade 5s linear forwards;
+  box-shadow: 1px 1px 5px grey;
+  padding: 1em; }
+
+@keyframes fade {
+  0% {
+    opacity: 0; }
+  10% {
+    opacity: 1; }
+  90% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+  .backInStock-signup-alert.show {
+    display: block; }
+    
