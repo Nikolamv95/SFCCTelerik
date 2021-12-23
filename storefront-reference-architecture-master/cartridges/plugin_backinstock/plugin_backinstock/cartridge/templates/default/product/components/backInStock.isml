@@ -1,6 +1,8 @@
+<iscomment>
+    Button component
+</iscomment>
 <div class="notificationWrapper ${product.readyToOrder ? " hideNotification" : ""}">
-    <h2 class="notificationHeadline">${Resource.msg('text.notify', 'common', null)}</h2>
-    <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+    <h3 class="notificationHeadline">${Resource.msg('text.notify', 'common', null)}</h3>
     <button class="btn btn-danger notificationButton" data-toggle="modal" data-target="#chooseBonusProductModal"
         data-pid="${product.id}" id="notificationButton">
         <i class="fa fa-bell"></i>
@@ -9,9 +11,46 @@
     <i class="fas fa-sms"></i>
 </div>
 
-<script>
-    var notificationButton = document.getElementById("notificationButton");
-    notificationButton.onclick = function() {
-        document.dispatchEvent(new CustomEvent("notificationClicked", { bubbles: true, composed: true, detail: { file: 'backInStok' } }));
-    }
-</script>
+
+        <iscomment> <input type="tel" class="form-control" id="phone" name="phone" placeholder="Add your phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"> </iscomment>
+
+
+<iscomment>
+    Form component
+</iscomment>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeButton">&times;</span>
+        <p class="h5 modalHeadline">${Resource.msg('form.tittle', 'common', null)}</p>
+        <form action="${URLUtils.url('Twillio-Subscribe')}" class="backInStock" method="POST" name="backInStock">
+            <!--- Product id --->
+            <input type="hidden" id="productId" name="productId" value="${pdict.product.id}">
+
+            <!--- Phone number --->
+            <div class="row">
+                <div class="col">
+                    <div class="form-group required">
+                        <label class="form-control-label" for="backInStock">${Resource.msg('phoneNumber.label', 'common', null)}</label>
+                        <input type="tel" required class="form-control required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        aria-describedby="backInStock-error" placeholder="Add your phone" id="phoneNumber"name="phoneNumber">
+                        <p class="customError" id="backInStock-error"> ${Resource.msg('invalidPhone.label', 'common', null)}</p>
+                    </div>
+                    <p class="phoneExample">${Resource.msg('phoneExample.label', 'common', null)}</p>
+                </div>
+            </div>
+
+            <!--- contact us submit --->
+            <div class="row">
+                <div class="col-sm-8">
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary subscribe-backInStock" type="submit" name="submit"
+                            value="submit">${Resource.msg('submitButton.label', 'common', null)}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
