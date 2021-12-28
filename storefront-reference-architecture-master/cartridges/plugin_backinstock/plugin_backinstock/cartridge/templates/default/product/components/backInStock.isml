@@ -11,18 +11,16 @@
     <i class="fas fa-sms"></i>
 </div>
 
-
-        <iscomment> <input type="tel" class="form-control" id="phone" name="phone" placeholder="Add your phone"
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"> </iscomment>
-
-
 <iscomment>
     Form component
 </iscomment>
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeButton">&times;</span>
-        <p class="h5 modalHeadline">${Resource.msg('form.tittle', 'common', null)}</p>
+        
+        <isset name="formHeadline" value="${contentMgr.getContent('BackInStockHeadlineModal').custom.body.markup}" scope="page" />
+        <isprint value="${formHeadline}" encoding="off" />
+
         <form action="${URLUtils.url('Twillio-Subscribe')}" class="backInStock" method="POST" name="backInStock">
             <!--- Product id --->
             <input type="hidden" id="productId" name="productId" value="${pdict.product.id}">
@@ -33,7 +31,8 @@
                     <div class="form-group required">
                         <label class="form-control-label" for="backInStock">${Resource.msg('phoneNumber.label', 'common', null)}</label>
                         <input type="tel" required class="form-control required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                        aria-describedby="backInStock-error" placeholder="Add your phone" id="phoneNumber"name="phoneNumber">
+                            aria-describedby="backInStock-error" placeholder="Add your phone" id="phoneNumber"
+                            name="phoneNumber">
                         <p class="customError" id="backInStock-error"> ${Resource.msg('invalidPhone.label', 'common', null)}</p>
                     </div>
                     <p class="phoneExample">${Resource.msg('phoneExample.label', 'common', null)}</p>

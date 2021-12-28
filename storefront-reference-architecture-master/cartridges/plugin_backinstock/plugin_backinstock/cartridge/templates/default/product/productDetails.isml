@@ -1,9 +1,11 @@
 <isdecorate template="common/layout/page">
     <isscript>
         var assets = require('*/cartridge/scripts/assets');
+        var contentMgr = require('dw/content/ContentMgr');
+        var stringUtils = require('dw/util/StringUtils');
         assets.addJs('/js/productDetail.js');
         assets.addJs('/js/backInStock.js');
-        assets.addCss('/css/contactUs.css');
+        assets.addCss('/css/toastMessage.css');
         assets.addCss('/css/product/detail.css');
         assets.addCss('/css/product/backInStock.css');
     </isscript>
@@ -137,7 +139,7 @@
 
         <!-- Notify me when back in stock -->
         <isinclude template="product/components/backInStock" />
-
+        
         <div>
             <isslot id="cts-recommendations-m" description="Complete the set products" context="global"
                 context-object="${pdict.product.raw}" />
