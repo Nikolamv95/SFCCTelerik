@@ -14,16 +14,16 @@ function displayMessage(data, button) {
         status = 'alert-danger';
     }
 
-    if ($('.contact-us-signup-message').length === 0) {
+    if ($('.backInStock-signup-message').length === 0) {
         $('body').append(
-            '<div class="contact-us-signup-message"></div>'
+            '<div class="backInStock-signup-message"></div>'
         );
     }
-    $('.contact-us-signup-message')
-        .append('<div class="contact-us-signup-alert text-center ' + status + '" role="alert">' + data.msg + '</div>');
+    $('.backInStock-signup-message')
+        .append('<div class="backInStock-signup-alert text-center ' + status + '" role="alert">' + data.msg + '</div>');
 
     setTimeout(function () {
-        $('.contact-us-signup-message').remove();
+        $('.backInStock-signup-message').remove();
         button.removeAttr('disabled');
     }, 3000);
 }
@@ -52,7 +52,7 @@ module.exports = {
         var errorPhone = document.getElementById('backInStock-error');
 
         button.onclick = function () {
-            var pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            var pattern = /^\+\d{1,4}[1-9]\d{0,9}$/;
             if (!pattern.test(phoneNumber.value)) {
                 errorPhone.style.display = 'block';
             }
@@ -71,7 +71,7 @@ module.exports = {
             var button = $('.subscribe-backInStock');
             var url = form.attr('action');
 
-            var pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            var pattern = /^\+\d{1,4}[1-9]\d{0,9}$/;
             if (!pattern.test(phoneNumber.value)) {
                 return;
             }

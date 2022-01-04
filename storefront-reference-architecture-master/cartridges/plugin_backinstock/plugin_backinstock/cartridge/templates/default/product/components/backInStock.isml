@@ -30,7 +30,7 @@
                 <div class="col">
                     <div class="form-group required">
                         <label class="form-control-label" for="backInStock">${Resource.msg('phoneNumber.label', 'common', null)}</label>
-                        <input type="tel" required class="form-control required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        <input type="tel" required class="form-control required" pattern="^\+\d{1,4}[1-9]\d{0,9}$"
                             aria-describedby="backInStock-error" placeholder="Add your phone" id="phoneNumber"
                             name="phoneNumber">
                         <p class="customError" id="backInStock-error"> ${Resource.msg('invalidPhone.label', 'common', null)}</p>
