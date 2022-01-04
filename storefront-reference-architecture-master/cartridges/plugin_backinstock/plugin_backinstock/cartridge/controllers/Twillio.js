@@ -7,11 +7,12 @@
 
 /**
  * @namespace Twillio
- */
+*/
 
 var server = require('server');
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var Transaction = require('dw/system/Transaction');
+var twillioService = require('*/cartridge/scripts/twillioService');
 
 /**
  * ContactUs-Subscribe : This endpoint is called to submit the shopper's contact information
@@ -49,9 +50,9 @@ server.post('Subscribe', server.middleware.https, function (req, res, next) {
         } else {
             // If number doesn't exist update the attribute
             if (!currentSubscriptionObj.custom.phoneNumbers.includes(form.phoneNumber)) {
-                var newPhoneNumbers = currentSubscriptionObj.custom.phoneNumbers.concat(','+ form.phoneNumber);
+                var newPhoneNumbers = currentSubscriptionObj.custom.phoneNumbers.concat(',' + form.phoneNumber);
                 Transaction.wrap(function () {
-                    currentSubscriptionObj.custom.phoneNumbers =  newPhoneNumbers; 
+                    currentSubscriptionObj.custom.phoneNumbers = newPhoneNumbers;
                 });
             }
         }
@@ -71,6 +72,20 @@ server.post('Subscribe', server.middleware.https, function (req, res, next) {
         });
     }
 
+    next();
+});
+
+server.get('SendSms', function (req, res, next) {
+    var args = {
+        fromNumber: '+12677133676',
+        textMsg: 'Hi, the product is in stock',
+        toNumber: '+359878309723',
+    };
+
+    var twillioResponse = JSON.parse(twillioService.sendSMS(args));
+    res.json({
+        twillioResponse: twillioResponse
+    });
     next();
 });
 
