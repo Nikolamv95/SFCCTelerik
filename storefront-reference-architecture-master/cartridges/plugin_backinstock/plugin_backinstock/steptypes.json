@@ -1,0 +1,13 @@
+{
+    "step-types": 
+    {
+        "script-module-step":
+        [
+            {
+                "@type-id":"custom.NotifyMeBackInStock",
+                "description":"My custom script step type",
+                "module":"plugin_backinstock/cartridge/scripts/steps/BackInStockJob"
+            }
+        ]
+    }
+}
