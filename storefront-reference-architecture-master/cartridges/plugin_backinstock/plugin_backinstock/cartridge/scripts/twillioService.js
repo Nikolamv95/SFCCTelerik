@@ -1,19 +1,13 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-else-return */
-/* eslint-disable quotes */
-/* eslint-disable no-undef */
-/* eslint-disable linebreak-style */
-/* eslint-disable require-jsdoc */
-/* eslint-disable no-unused-vars */
-/* eslint-disable padded-blocks */
-/* eslint-disable linebreak-style */
 'use strict';
 
-function sendSMS(args) {
-    let fromNumber = args.fromNumber;
-    let textMsg = args.textMsg ;
-    let toNumber = args.toNumber;
-
+/**
+ * Funcion which make call to Twillio API in order to send sms to specific number
+ * @param {string} fromNumber Phone number from which the sms will be send
+ * @param {string} textMsg Text message which the customer will receive
+ * @param {string} toNumber Customer phone number which will receive the sms
+ * @returns 
+ */
+function sendSMS(fromNumber, textMsg, toNumber) {
     var getTwillioService = dw.svc.LocalServiceRegistry.createService("http.twillio.sendSms", {
         createRequest: function (svc) {
             svc.setRequestMethod("POST");
@@ -27,7 +21,7 @@ function sendSMS(args) {
         }
     });
 
-    var response = getTwillioService.call().object;
+    let response = getTwillioService.call().object;
     return response;
 }
 

@@ -1,8 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-ex-assign */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable linebreak-style */
 'use strict';
 
 /**
@@ -13,51 +8,48 @@ var server = require('server');
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var Transaction = require('dw/system/Transaction');
 var twillioService = require('*/cartridge/scripts/twillioService');
+var Resource = require('dw/web/Resource');
 
 /**
- * ContactUs-Subscribe : This endpoint is called to submit the shopper's contact information
- * @name Base/Twillio-Subscribe
+ * ContactUs-Subscribe : This endpoint is called to submit the shopper's contact information in 
+ * custom obeject NotifyMeBackInStock if the customer wants to subscribe for specific product
+ * @name Twillio-Subscribe
  * @function
  * @memberof Twillio
- * @param {middleware} - server.middleware.https
  * @param {httpparameter} - productId - The product ID
  * @param {httpparameter} - phoneNumber - The phone number which has to be notified
  * @param {category} - sensitive
  * @param {returns} - json
  * @param {serverfunction} - post
  */
-server.post('Subscribe', server.middleware.https, function (req, res, next) {
-    // Validate phoneNumber in middleware
-    var Resource = require('dw/web/Resource');
+server.post('Subscribe', function (req, res, next) {
     const TYPE = 'NotifyMeBackInStock';
-    var form = req.form;
-    var error = false;
-    var isObjectExist = false;
-    var currentObject;
+    let form = req.form;
+    let error = false;
 
     if (!form) {
         error = true;
-    }
+    }else {
+        var currentSubscriptionObj = CustomObjectMgr.getCustomObject(TYPE, form.productId)
 
-    var currentSubscriptionObj = CustomObjectMgr.getCustomObject(TYPE, form.productId)
-
-    try {
-        if (!currentSubscriptionObj) {
-            Transaction.wrap(function () {
-                var newSubscriptionObj = CustomObjectMgr.createCustomObject(TYPE, form.productId);
-                newSubscriptionObj.custom.phoneNumbers = form.phoneNumber;
-            });
-        } else {
-            // If number doesn't exist update the attribute
-            if (!currentSubscriptionObj.custom.phoneNumbers.includes(form.phoneNumber)) {
-                var newPhoneNumbers = currentSubscriptionObj.custom.phoneNumbers.concat(',' + form.phoneNumber);
+        try {
+            if (currentSubscriptionObj === null) {
                 Transaction.wrap(function () {
-                    currentSubscriptionObj.custom.phoneNumbers = newPhoneNumbers;
+                    let newSubscriptionObj = CustomObjectMgr.createCustomObject(TYPE, form.productId);
+                    newSubscriptionObj.custom.phoneNumbers = form.phoneNumber;
                 });
+            } else {
+                // If number doesn't exist update the attribute
+                if (!currentSubscriptionObj.custom.phoneNumbers.includes(form.phoneNumber)) {
+                    let newPhoneNumbers = currentSubscriptionObj.custom.phoneNumbers.concat(',' + form.phoneNumber);
+                    Transaction.wrap(function () {
+                        currentSubscriptionObj.custom.phoneNumbers = newPhoneNumbers;
+                    });
+                }
             }
+        } catch (error) {
+            error = true;
         }
-    } catch (error) {
-        error = true;
     }
 
     if (!error) {
@@ -72,20 +64,6 @@ server.post('Subscribe', server.middleware.https, function (req, res, next) {
         });
     }
 
-    next();
-});
-
-server.get('SendSms', function (req, res, next) {
-    var args = {
-        fromNumber: '+12677133676',
-        textMsg: 'Hi, the product is in stock',
-        toNumber: '+359878309723',
-    };
-
-    var twillioResponse = JSON.parse(twillioService.sendSMS(args));
-    res.json({
-        twillioResponse: twillioResponse
-    });
     next();
 });
 

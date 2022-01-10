@@ -6,7 +6,7 @@
             {
                 "@type-id":"custom.NotifyMeBackInStock",
                 "description":"My custom script step type",
-                "module":"plugin_backinstock/cartridge/scripts/steps/BackInStockJob"
+                "module":"plugin_backinstock/cartridge/scripts/jobs/BackInStockJob"
             }
         ]
     }

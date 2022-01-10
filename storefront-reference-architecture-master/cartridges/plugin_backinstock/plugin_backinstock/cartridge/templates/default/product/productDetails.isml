@@ -5,9 +5,13 @@
         var stringUtils = require('dw/util/StringUtils');
         assets.addJs('/js/productDetail.js');
         assets.addJs('/js/backInStock.js');
+        assets.addJs('/js/detailExtend.js');
         assets.addCss('/css/toastMessage.css');
         assets.addCss('/css/product/detail.css');
         assets.addCss('/css/product/backInStock.css');
+
+        var ProductMgr = require('dw/catalog/ProductMgr');
+
     </isscript>
 
     <isset name="product" value="${pdict.product}" scope="page" />
@@ -21,7 +25,6 @@
                 <div class="product-breadcrumb d-md-none">
                     <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
                 </div>
-
                 <!-- Product Name -->
                 <div class="row">
                     <div class="d-md-none col-sm-12">
@@ -114,7 +117,7 @@
                         </div>
                     </div>
 
-                    <div class="prices-add-to-cart-actions">
+                    <div class="prices-add-to-cart-actions buttons">
                         <div class="row">
                             <div class="col-12">
                                 <!-- Prices -->
@@ -125,8 +128,14 @@
                             </div>
                         </div>
 
-                        <!-- Cart and [Optionally] Apple Pay -->
-                        <isinclude template="product/components/addToCartProduct" />
+                        <span class="availability product-availability">${product.readyToOrder || product.available}</span>
+                        <isif condition="${!product.available}">
+                            <!-- Cart and [Optionally] Apple Pay -->
+                            <isinclude template="product/components/addToCartProduct" />
+                        <iselse/>
+                            <!-- Notify me when back in stock -->
+                            <isinclude template="product/components/backInStock" />
+                        </isif>
                     </div>
 
                     <!-- Social Sharing Icons -->
@@ -137,9 +146,8 @@
             </div>
         </div>
 
-        <!-- Notify me when back in stock -->
-        <isinclude template="product/components/backInStock" />
-        
+
+
         <div>
             <isslot id="cts-recommendations-m" description="Complete the set products" context="global"
                 context-object="${pdict.product.raw}" />

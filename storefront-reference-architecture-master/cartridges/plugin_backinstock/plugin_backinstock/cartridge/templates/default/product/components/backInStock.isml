@@ -1,8 +1,7 @@
 <iscomment>
     Button component
 </iscomment>
-<div class="notificationWrapper ${product.readyToOrder ? " hideNotification" : ""}">
-    <h3 class="notificationHeadline">${Resource.msg('text.notify', 'common', null)}</h3>
+<div class="notificationWrapper">
     <button class="btn btn-danger notificationButton" data-toggle="modal" data-target="#chooseBonusProductModal"
         data-pid="${product.id}" id="notificationButton">
         <i class="fa fa-bell"></i>
@@ -17,13 +16,14 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeButton">&times;</span>
-        
-        <isset name="formHeadline" value="${contentMgr.getContent('BackInStockHeadlineModal').custom.body.markup}" scope="page" />
+
+        <isset name="formHeadline" value="${contentMgr.getContent('BackInStockHeadlineModal').custom.body.markup}"
+            scope="page" />
         <isprint value="${formHeadline}" encoding="off" />
 
         <form action="${URLUtils.url('Twillio-Subscribe')}" class="backInStock" method="POST" name="backInStock">
             <!--- Product id --->
-            <input type="hidden" id="productId" name="productId" value="${pdict.product.id}">
+            <input type="hidden" id="productId" name="productId" class="product-id" value="${pdict.product.id}">
 
             <!--- Phone number --->
             <div class="row">
@@ -31,11 +31,10 @@
                     <div class="form-group required">
                         <label class="form-control-label" for="backInStock">${Resource.msg('phoneNumber.label', 'common', null)}</label>
                         <input type="tel" required class="form-control required" pattern="^\+\d{1,4}[1-9]\d{0,9}$"
-                            aria-describedby="backInStock-error" placeholder="Add your phone" id="phoneNumber"
+                            aria-describedby="backInStock-error" placeholder="+359999999999" id="phoneNumber"
                             name="phoneNumber">
                         <p class="customError" id="backInStock-error"> ${Resource.msg('invalidPhone.label', 'common', null)}</p>
                     </div>
-                    <p class="phoneExample">${Resource.msg('phoneExample.label', 'common', null)}</p>
                 </div>
             </div>
 

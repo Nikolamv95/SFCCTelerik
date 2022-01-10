@@ -7,7 +7,8 @@
  */
 function displayMessage(data, button) {
     $.spinner().stop();
-    var status;
+
+    let status;
     if (data.success) {
         status = 'alert-success';
     } else {
@@ -22,6 +23,8 @@ function displayMessage(data, button) {
     $('.backInStock-signup-message')
         .append('<div class="backInStock-signup-alert text-center ' + status + '" role="alert">' + data.msg + '</div>');
 
+    let modal = document.getElementById('myModal');
+    modal.style.display = 'none';    
     setTimeout(function () {
         $('.backInStock-signup-message').remove();
         button.removeAttr('disabled');
@@ -29,12 +32,20 @@ function displayMessage(data, button) {
 }
 
 module.exports = {
+    /**
+     * Manage when the subsciption modal should be open and when closed
+     */
     openCloseNotification: function () {
-        var notificationButton = document.getElementById('notificationButton');
-        var modal = document.getElementById('myModal');
-        var span = document.getElementById('closeButton');
+        let notificationButton = document.getElementById('notificationButton');
+        let modal = document.getElementById('myModal');
+        let span = document.getElementById('closeButton');
         notificationButton.onclick = function () {
             modal.style.display = 'block';
+            setTimeout(function () {
+                let productInput = document.querySelector('#productId.product-id');
+                let productNumber = document.querySelector('.product-number .product-id');
+                productInput.value = productNumber.textContent;
+            }, 500);
         };
         span.onclick = function () {
             modal.style.display = 'none';
@@ -46,13 +57,16 @@ module.exports = {
         };
     },
 
+    /**
+     * Check for specific phone number validation
+     */
     phoneErrorValidation: function () {
-        var button = document.querySelector('button.subscribe-backInStock');
-        var phoneNumber = document.getElementById('phoneNumber');
-        var errorPhone = document.getElementById('backInStock-error');
+        let button = document.querySelector('button.subscribe-backInStock');
+        let phoneNumber = document.getElementById('phoneNumber');
+        let errorPhone = document.getElementById('backInStock-error');
 
         button.onclick = function () {
-            var pattern = /^\+\d{1,4}[1-9]\d{0,9}$/;
+            let pattern = /^\+\d{1,4}[1-9]\d{0,9}$/;
             if (!pattern.test(phoneNumber.value)) {
                 errorPhone.style.display = 'block';
             }
@@ -64,14 +78,17 @@ module.exports = {
         };
     },
 
+    /**
+     * Create AJAX request to Twillio-Subscirbe
+     */
     subscribeContact: function () {
         $('form.backInStock').submit(function (e) {
             e.preventDefault();
-            var form = $(this);
-            var button = $('.subscribe-backInStock');
-            var url = form.attr('action');
+            let form = $(this);
+            let button = $('.subscribe-backInStock');
+            let url = form.attr('action');
 
-            var pattern = /^\+\d{1,4}[1-9]\d{0,9}$/;
+            let pattern = /^\+\d{1,4}[1-9]\d{0,9}$/;
             if (!pattern.test(phoneNumber.value)) {
                 return;
             }
